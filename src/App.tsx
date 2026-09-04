@@ -1,5 +1,6 @@
 import { Header } from './components/Header';
 import { Calendario } from './components/Calendario';
+import { CarruselEventos } from './components/CarruselEventos';
 import './index.css'; 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <main>
         <Calendario />
+        <CarruselEventos />
         <p>El área de trabajo está lista.</p>
       </main>
     </div>

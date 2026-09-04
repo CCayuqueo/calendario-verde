@@ -161,8 +161,14 @@ export function Calendario() {
           // Buscamos si el día actual del bucle tiene eventos asignados
           const eventosDelDia = eventosEsteMes.filter(e => e.dia === dia);
           
+          const hoy = new Date();
+          const esHoy = hoy.getDate() === dia && 
+                        hoy.getMonth() === mes && 
+                        hoy.getFullYear() === año;
+          
           return (
-            <div key={dia} className="celda-dia">
+            // Contenedor único con la clase condicional
+            <div key={dia} className={`celda-dia ${esHoy ? 'dia-hoy' : ''}`}>
               <span className="numero-dia">{dia}</span>
               
               {/* Si hay eventos, los dibujamos debajo del número */}
