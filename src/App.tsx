@@ -10,7 +10,6 @@ function App() {
       <main>
         <Calendario />
         <CarruselEventos />
-        <p>El área de trabajo está lista.</p>
       </main>
     </div>
   );

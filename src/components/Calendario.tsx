@@ -141,11 +141,11 @@ export function Calendario() {
   return (
     <div className="calendario-contenedor">
       <div className="calendario-controles">
-        <button onClick={mesAnterior}>&lt; Anterior</button>
+        <button className="navegacion-calendario" onClick={mesAnterior}>&lt; Anterior</button>
         <h2>
           {fechaActual.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase()}
         </h2>
-        <button onClick={mesSiguiente}>Siguiente &gt;</button>
+        <button className="navegacion-calendario" onClick={mesSiguiente}>Siguiente &gt;</button>
       </div>
 
       <div className="calendario-grid">
