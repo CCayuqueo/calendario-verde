@@ -105,9 +105,9 @@ export function CarruselEventos() {
 
   const informacionDetallada: Record<string, string> = {
       'Día Mundial de las Aves Playeras': 'La importancia de proteger las rutas migratorias y los ecosistemas costeros de estas aves.',
-      'Día Internacional de la Preservación de la Capa de Ozono': 'Detalles sobre el Protocolo de Montreal y la reducción de gases nocivos.',
-      'Día Mundial sin Automóvil': 'Los beneficios de la movilidad sustentable y la reducción de la huella de carbono en la ciudad.',
-      // Simplemente copia el nombre exacto del evento y añade tu texto al lado
+      'Día Internacional de la Preservación de la Capa de Ozono': 'La capa de ozono es vital para la vida en la Tierra. Protege de los rayos UV, preserva los ecosistemas y mitiga el cambio climático',
+      'Día Mundial sin Automóvil': 'Promueve la movilidad sostenible. Trasladarse utilizando bicicletas, scooters e incluso a pie ayuda a reducir la huella de carbono en la ciudad.',
+      'Día Mundial Marítimo': 'El transporte marítimo es clave en la economía mundial. Es importante promover que sea sostenible y que se cuide el ambiente marítimo y sus ecosistemas.',
     };
 
     const textoInformativo = informacionDetallada[eventoActual.nombre] || 'Información en construcción para esta fecha ambiental.';
