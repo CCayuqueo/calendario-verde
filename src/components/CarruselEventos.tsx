@@ -97,12 +97,20 @@ export function CarruselEventos() {
 
   // Lógica de control del Carrusel
   const [indice, setIndice] = useState(0);
-
-  if (proximosEventos.length === 0) {
-    return <div className="carrusel-contenedor">No hay más eventos este año.</div>;
+    if (proximosEventos.length === 0) {
+      return <div className="carrusel-contenedor">No hay más eventos este año.</div>;
   }
 
   const eventoActual = proximosEventos[indice];
+
+  const informacionDetallada: Record<string, string> = {
+      'Día Mundial de las Aves Playeras': 'La importancia de proteger las rutas migratorias y los ecosistemas costeros de estas aves.',
+      'Día Internacional de la Preservación de la Capa de Ozono': 'Detalles sobre el Protocolo de Montreal y la reducción de gases nocivos.',
+      'Día Mundial sin Automóvil': 'Los beneficios de la movilidad sustentable y la reducción de la huella de carbono en la ciudad.',
+      // Simplemente copia el nombre exacto del evento y añade tu texto al lado
+    };
+
+    const textoInformativo = informacionDetallada[eventoActual.nombre] || 'Información en construcción para esta fecha ambiental.';
 
   return (
     <div className="carrusel-contenedor">
@@ -133,6 +141,10 @@ export function CarruselEventos() {
         >
           Siguiente &gt;
         </button>
+      </div>
+      <div className="tarjeta-informacion">
+        <h4>¿Por qué es importante?</h4>
+        <p>{textoInformativo}</p>
       </div>
     </div>
   );

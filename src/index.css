@@ -198,6 +198,30 @@ html, body {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.tarjeta-informacion {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fafafa;
+  border-left: 4px solid #81a71a;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.tarjeta-informacion h4 {
+  margin: 0 0 0.5rem 0;
+  color: #81a71a;
+  font-size: 1rem;
+}
+
+.tarjeta-informacion p {
+  margin: 0;
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+
 /* Reglas que solo se aplican en pantallas de 600px o menos (celulares) */
 @media (max-width: 600px) {
   .calendario-contenedor, 
