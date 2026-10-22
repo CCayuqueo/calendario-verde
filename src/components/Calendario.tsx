@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { EventoCalendario } from './EventoCalendario';
 
 // --- FUNCIONES AUXILIARES PARA FECHAS DINÁMICAS ---
 
@@ -62,15 +63,15 @@ export function Calendario() {
       eventos.push({ dia: 22, nombre: 'Día de la Tierra' }); /*[cite: 1] */
       eventos.push({ dia: 25, nombre: 'Día Mundial de los Pingüinos' }); /*[cite: 1] */
       // Último miércoles (3)
-      eventos.push({ dia: obtenerUltimoDia(año, mes, 3), nombre: 'Día Int. de la Conciencia sobre Ruido' }); /*[cite: 1] */
+      eventos.push({ dia: obtenerUltimoDia(año, mes, 3), nombre: 'Día Internacional de la Conciencia sobre Ruido' }); /*[cite: 1] */
     }
     if (mes === 4) { // Mayo
       // Segundo sábado (6)
-      eventos.push({ dia: obtenerNthDia(año, mes, 6, 2), nombre: 'Día Int. de las Aves Migratorias' }); /*[cite: 1] */
+      eventos.push({ dia: obtenerNthDia(año, mes, 6, 2), nombre: 'Día Internacional de las Aves Migratorias' }); /*[cite: 1] */
       eventos.push({ dia: 16, nombre: 'Día Internacional de la Luz' }); /*[cite: 1] */
       eventos.push({ dia: 17, nombre: 'Día Internacional del Reciclaje' }); /*[cite: 1] */
       eventos.push({ dia: 20, nombre: 'Día Mundial de las Abejas' }); /*[cite: 1] */
-      eventos.push({ dia: 22, nombre: 'Día Int. de la Diversidad Biológica' }); /*[cite: 1] */
+      eventos.push({ dia: 22, nombre: 'Día Internacional de la Diversidad Biológica' }); /*[cite: 1] */
     }
     if (mes === 5) { // Junio
       eventos.push({ dia: 3, nombre: 'Día Mundial de la Bicicleta' }); /*[cite: 1] */
@@ -86,7 +87,7 @@ export function Calendario() {
       eventos.push({ dia: 3, nombre: 'Día Internacional sin Bolsas Plásticas' }); /*[cite: 1] */
       eventos.push({ dia: 7, nombre: 'Día de la Conservación del Suelo' }); /*[cite: 1] */
       eventos.push({ dia: 7, nombre: 'Día Mundial del Cóndor Andino' }); /*[cite: 1] */
-      eventos.push({ dia: 31, nombre: 'Día Int. del Guardaparques (UNESCO)' }); /*[cite: 1] */
+      eventos.push({ dia: 31, nombre: 'Día Internacional del Guardaparques' }); /*[cite: 1] */
     }
     if (mes === 7) { // Agosto
       eventos.push({ dia: 3, nombre: 'Prohibición Ley Bolsas Plásticas en el Comercio' }); /*[cite: 1] */
@@ -96,7 +97,7 @@ export function Calendario() {
     }
     if (mes === 8) { // Septiembre
       eventos.push({ dia: 6, nombre: 'Día Mundial de las Aves Playeras' }); /*[cite: 1] */
-      eventos.push({ dia: 16, nombre: 'Día Int. de la Preservación de la Capa de Ozono' }); /*[cite: 1] */
+      eventos.push({ dia: 16, nombre: 'Día Internacional de la Preservación de la Capa de Ozono' }); /*[cite: 1] */
       eventos.push({ dia: 22, nombre: 'Día Mundial sin Automóvil' }); /*[cite: 1] */
       // Último jueves (4)
       eventos.push({ dia: obtenerUltimoDia(año, mes, 4), nombre: 'Día Marítimo Mundial' }); /*[cite: 1] */
@@ -104,7 +105,7 @@ export function Calendario() {
       eventos.push({ dia: obtenerUltimoDia(año, mes, 5), nombre: 'Día de Limpieza de Playas y Costas' }); /*[cite: 1] */
       // Último viernes (5)
       eventos.push({ dia: obtenerUltimoDia(año, mes, 5), nombre: 'Día Nacional sin Automóvil' }); /*[cite: 1] */
-      eventos.push({ dia: 29, nombre: 'Día Int. de concienciación sobre la pérdida y el desperdicio de alimentos' }); /*[cite: 1] */
+      eventos.push({ dia: 29, nombre: 'Día Internacional de Concienciación sobre la Pérdida y el Desperdicio de Alimentos' }); /*[cite: 1] */
       eventos.push({ dia: 30, nombre: 'Día Nacional del Guardaparque' }); /*[cite: 1] */
     }
     if (mes === 9) { // Octubre
@@ -122,7 +123,7 @@ export function Calendario() {
       // Primer sábado (6)
       eventos.push({ dia: obtenerNthDia(año, mes, 6, 1), nombre: 'Día de la Fauna Chilena' }); /*[cite: 1] */
       // Segundo sábado (6)
-      eventos.push({ dia: obtenerNthDia(año, mes, 6, 2), nombre: 'Día Nac. de las Áreas Protegidas' }); /*[cite: 1] */
+      eventos.push({ dia: obtenerNthDia(año, mes, 6, 2), nombre: 'Día Nacional de las Áreas Protegidas' }); /*[cite: 1] */
       // Último viernes (5)
       eventos.push({ dia: obtenerUltimoDia(año, mes, 5), nombre: 'Día Mundial sin compras' }); /*[cite: 1] */
     }
@@ -139,18 +140,18 @@ export function Calendario() {
   const eventosEsteMes = obtenerEventosDelMes();
 
   return (
-    <div className="calendario-contenedor">
+    <article className="calendario-contenedor" aria-label="Calendario de fechas ambientales">
       <div className="calendario-controles">
-        <button className="navegacion-calendario" onClick={mesAnterior}>&lt; Anterior</button>
-        <h2>
+        <button className="navegacion-calendario" onClick={mesAnterior} aria-label="Mes anterior">&lsaquo;</button>
+        <h3 aria-live="polite">
           {fechaActual.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase()}
-        </h2>
-        <button className="navegacion-calendario" onClick={mesSiguiente}>Siguiente &gt;</button>
+        </h3>
+        <button className="navegacion-calendario" onClick={mesSiguiente} aria-label="Mes siguiente">&rsaquo;</button>
       </div>
 
       <div className="calendario-grid">
         {diasSemana.map((dia) => (
-          <div key={dia} className="dia-semana">{dia}</div>
+          <div key={dia} className="dia-semana" aria-label={dia}>{dia}</div>
         ))}
 
         {espaciosVacios.map((espacio) => (
@@ -167,22 +168,24 @@ export function Calendario() {
                         hoy.getFullYear() === año;
           
           return (
-            // Contenedor único con la clase condicional
-            <div key={dia} className={`celda-dia ${esHoy ? 'dia-hoy' : ''}`}>
+            <div
+              key={dia}
+              className={`celda-dia ${esHoy ? 'dia-hoy' : ''}`}
+              aria-current={esHoy ? 'date' : undefined}
+              aria-label={`${dia} de ${fechaActual.toLocaleDateString('es-ES', { month: 'long' })}${eventosDelDia.length ? `: ${eventosDelDia.map(evento => evento.nombre).join(', ')}` : ''}`}
+            >
               <span className="numero-dia">{dia}</span>
               
               {/* Si hay eventos, los dibujamos debajo del número */}
               <div className="contenedor-eventos">
-                {eventosDelDia.map((evento, index) => (
-                  <div key={index} className="etiqueta-evento">
-                    {evento.nombre}
-                  </div>
+                {eventosDelDia.map((evento) => (
+                  <EventoCalendario key={evento.nombre} nombre={evento.nombre} />
                 ))}
               </div>
             </div>
           );
         })}
       </div>
-    </div>
+    </article>
   );
 }

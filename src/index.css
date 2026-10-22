@@ -1,255 +1,792 @@
-html, body {
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1d382d;
+  background: #f5f7f1;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-canvas: #f5f7f1;
+  --color-surface: #ffffff;
+  --color-surface-soft: #eaf0e5;
+  --color-forest: #1d382d;
+  --color-forest-muted: #52665a;
+  --color-accent: #a44720;
+  --color-accent-hover: #813819;
+  --color-border: #dce4d9;
+  --shadow-card: 0 16px 42px rgb(29 56 45 / 8%);
+  --radius-card: 22px;
+  --radius-control: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
   margin: 0;
-  padding: 0;
-  width: 100%;
-  background-color: #d8e589;
-  overflow-x: hidden;
 }
 
-/* Vite envuelve tu app en este div, hay que quitarle los márgenes */
-#root {
-  width: 100%;
-  max-width: 100%; 
+body,
+button,
+a {
+  font-family: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #d88a48;
+  outline-offset: 3px;
+}
+
+.contenedor-principal {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.header-principal {
+  position: relative;
+  z-index: 1;
+  background: var(--color-surface);
+  border-bottom: 1px solid rgb(29 56 45 / 8%);
+}
+
+.header-interior {
+  display: flex;
+  width: min(1180px, calc(100% - 40px));
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--color-forest);
+  font-size: 1.06rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.marca-icono {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--color-forest);
+  color: white;
+}
+
+.marca-icono svg {
+  width: 23px;
+  height: 23px;
+}
+
+.navegacion-principal {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navegacion-principal a {
+  color: var(--color-forest-muted);
+  font-size: 0.91rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.navegacion-principal a:hover {
+  color: var(--color-accent);
+}
+
+.navegacion-principal .enlace-accion {
+  padding: 11px 17px;
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+  color: white;
+}
+
+.navegacion-principal .enlace-accion:hover {
+  transform: translateY(-1px);
+  background: var(--color-accent-hover);
+  color: white;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding: 72px 20px 78px;
+  background:
+    radial-gradient(ellipse at 84% 15%, rgb(180 199 160 / 30%), transparent 34%),
+    linear-gradient(135deg, #e9f0e4 0%, #f1f4eb 58%, #e5eddf 100%);
+}
+
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  right: max(-8vw, -90px);
+  bottom: -145px;
+  width: 420px;
+  height: 280px;
+  border: 1px solid rgb(68 104 75 / 10%);
+  border-radius: 50%;
+  content: "";
+  transform: rotate(-24deg);
+}
+
+.hero-interior {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.hero-etiqueta,
+.seccion-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 17px;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.hero-etiqueta::before {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  content: "";
+}
+
+.hero h1 {
+  max-width: 720px;
   margin: 0;
-  padding: 0;
+  color: var(--color-forest);
+  font-size: clamp(2.7rem, 6vw, 5.2rem);
+  font-weight: 780;
+  letter-spacing: -0.075em;
+  line-height: 0.99;
 }
-*{
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
+.hero h1 span {
+  color: #5d775b;
 }
 
-.header-principal{
-  color: #291702;
-  font-size: 1.2rem;
-  align-content: center;
-  text-align: center;
-  background: linear-gradient(to bottom, #81a71a, #d8e589);
-  padding: 0.5rem;
+.hero-descripcion {
+  max-width: 590px;
+  margin: 22px 0 27px;
+  color: #4c6154;
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: 1.75;
+}
+
+.boton-principal {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 20px;
   border: 0;
-}
-.contenedor-principal{
-  text-align: center;
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+  box-shadow: 0 8px 20px rgb(164 71 32 / 18%);
+  color: white;
+  font-size: 0.94rem;
+  font-weight: 750;
+  text-decoration: none;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-.calendario-contenedor {
-  max-width: 600px;
-  margin: 2rem auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  background-color: white;
+.boton-principal:hover {
+  transform: translateY(-2px);
+  background: var(--color-accent-hover);
+  box-shadow: 0 11px 24px rgb(129 56 25 / 22%);
+}
+
+.boton-principal svg {
+  width: 17px;
+  height: 17px;
+}
+
+.contenido-principal {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 68px 0 86px;
+}
+
+.encabezado-seccion {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  gap: 16px;
+}
+
+.encabezado-seccion .seccion-etiqueta {
+  margin-bottom: 8px;
+}
+
+.encabezado-seccion h2 {
+  margin: 0;
+  color: var(--color-forest);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+}
+
+.nota-seccion {
+  margin: 0 0 4px;
+  color: var(--color-forest-muted);
+  font-size: 0.9rem;
+}
+
+.panel-calendario {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
+  align-items: start;
+  gap: 22px;
+}
+
+.calendario-contenedor,
+.carrusel-contenedor {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid rgb(29 56 45 / 6%);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
 }
 
 .calendario-controles {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 25px;
+  gap: 12px;
 }
 
-.calendario-controles h2 {
+.calendario-controles h3 {
   margin: 0;
-  color: #81a71a; /* Un tono verde para hacer honor al nombre del proyecto */
+  color: var(--color-forest);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 760;
+  letter-spacing: 0.035em;
+  text-align: center;
 }
 
-/* La magia matemática: 7 columnas exactamente iguales */
+.navegacion-calendario {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-forest);
+  cursor: pointer;
+  font-size: 1.35rem;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.navegacion-calendario:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-accent);
+  background: #fff7f2;
+  color: var(--color-accent);
+}
+
 .calendario-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(3px, 0.8vw, 8px);
   text-align: center;
 }
 
 .dia-semana {
-  font-weight: bold;
-  padding: 0.5rem;
-  color: #555;
+  padding: 5px 0 10px;
+  color: #718176;
+  font-size: 0.72rem;
+  font-weight: 760;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.celda-vacia {
+  min-height: 70px;
 }
 
 .celda-dia {
-  /* Modificamos ligeramente la celda para que maneje bien el contenido extra */
   display: flex;
+  min-width: 0;
+  min-height: 93px;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  min-height: 100px; /* Un poco más alto para que quepan los textos */
-  padding: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  padding: 8px;
   overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: #fbfcf9;
+  text-align: left;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 
 .celda-dia:hover {
-  background-color: #f1f8e9; /* Verde muy claro al pasar el mouse */
+  transform: translateY(-1px);
+  border-color: #d7e4d3;
+  background: #f2f7ef;
 }
 
-
-
 .numero-dia {
-  font-weight: bold;
-  margin-bottom: 5px;
-  align-self: flex-end;
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 auto;
+  place-items: center;
+  margin: 0 0 5px auto;
+  border-radius: 50%;
+  color: #43584a;
+  font-size: 0.82rem;
+  font-weight: 680;
+}
+
+.dia-hoy {
+  border-color: #a6bea0;
+  background: #eff5ec;
+}
+
+.dia-hoy .numero-dia {
+  background: var(--color-forest);
+  color: white;
 }
 
 .contenedor-eventos {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
   width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
 }
 
 .etiqueta-evento {
-  background-color: #81a71a; /* Color verde ambiental */
-  color: white;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 4px 6px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 6px;
+  background: #e6eee2;
+  color: #294735;
+  cursor: pointer;
   font-size: 0.65rem;
-  padding: 2px 4px;
-  border-radius: 3px;
+  font-weight: 650;
+  line-height: 1.25;
   text-align: left;
-  white-space: normal;
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.etiqueta-evento:hover,
+.etiqueta-evento[aria-expanded="true"] {
+  background: #d6e4d1;
+  box-shadow: inset 0 0 0 1px #9bb895;
+}
+
+.etiqueta-evento-texto {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: break-word;
-  line-height: 1.1;
+  white-space: nowrap;
 }
 
-/* Resaltar el día de Hoy en el calendario */
-.dia-hoy {
-  background-color: #e8f5e9;
-  border: 2px solid #81a71a;
+.evento-tooltip {
+  position: fixed;
+  z-index: 1000;
+  width: max-content;
+  max-width: min(300px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  padding: 13px 15px;
+  overflow-y: auto;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 12px;
+  background: #1d382d;
+  box-shadow: 0 12px 32px rgb(12 30 21 / 28%);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 160ms ease, transform 160ms ease;
 }
 
-.dia-hoy .numero-dia {
-  background-color: #81a71a;
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.evento-tooltip-abierto {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
-/* Estilos del Carrusel */
+.evento-tooltip-titulo {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.evento-tooltip-descripcion {
+  margin: 7px 0 0;
+  color: #e0e9de;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.evento-tooltip-hora {
+  display: block;
+  margin-top: 7px;
+  color: #c4d5bc;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
 .carrusel-contenedor {
-  max-width: 600px;
-  margin: 0 auto 2rem auto;
-  padding: 1.5rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-forest);
+  color: white;
+}
+
+.carrusel-contenedor::after {
+  position: absolute;
+  top: -58px;
+  right: -76px;
+  width: 185px;
+  height: 185px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
 }
 
 .carrusel-titulo {
-  margin-top: 0;
-  color: #81a71a;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 20px;
+  color: #dcebd7;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 .carrusel-tarjeta {
-  background-color: #f1f8e9;
-  padding: 2rem 1rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  min-height: 100px;
+  position: relative;
+  z-index: 1;
   display: flex;
+  min-height: 165px;
   flex-direction: column;
   justify-content: center;
+  margin: 0;
+  padding: 23px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 8%);
 }
 
 .carrusel-fecha {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  margin-bottom: 12px;
+  color: #c4d5bc;
+  font-size: 0.75rem;
+  font-weight: 760;
+  letter-spacing: 0.06em;
 }
 
 .carrusel-nombre {
-  font-size: 1.25rem;
-  color: #333;
+  color: white;
+  font-size: clamp(1.3rem, 2.1vw, 1.7rem);
+  font-weight: 720;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
 }
 
 .carrusel-controles {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin: 17px 0 22px;
+  gap: 8px;
 }
 
 .carrusel-controles button {
-  padding: 0.5rem 1rem;
-  background-color: #81a71a;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 10px;
+  background: transparent;
   color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 650;
+  transition: background-color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+}
+
+.carrusel-controles button:not(:disabled):hover {
+  border-color: white;
+  background: rgb(255 255 255 / 10%);
 }
 
 .carrusel-controles button:disabled {
-  background-color: #ccc;
   cursor: not-allowed;
+  opacity: 0.48;
 }
 
-
-.navegacion-calendario{
-  padding: 0.5rem 1rem;
-  background-color: #81a71a;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.carrusel-controles span {
+  color: #dce6d9;
+  font-size: 0.8rem;
+  font-weight: 650;
 }
 
 .tarjeta-informacion {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #fafafa;
-  border-left: 4px solid #81a71a;
-  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+  padding-top: 19px;
+  border-top: 1px solid rgb(255 255 255 / 17%);
   text-align: left;
 }
 
 .tarjeta-informacion h4 {
-  margin: 0 0 0.5rem 0;
-  color: #81a71a;
-  font-size: 1rem;
+  margin: 0 0 8px;
+  color: #dcebd7;
+  font-size: 0.89rem;
+  font-weight: 750;
 }
 
 .tarjeta-informacion p {
   margin: 0;
-  color: #444;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  color: #e0e9de;
+  font-size: 0.86rem;
+  line-height: 1.7;
 }
 
+.pie-pagina {
+  padding: 24px 20px;
+  border-top: 1px solid var(--color-border);
+  background: #edf1e9;
+  color: #5a6c5e;
+  text-align: center;
+}
 
-/* Reglas que solo se aplican en pantallas de 600px o menos (celulares) */
-@media (max-width: 600px) {
-  .calendario-contenedor, 
-  .carrusel-contenedor {
-    margin: 1rem 0.5rem; /* Reduce los márgenes laterales */
-    padding: 0.5rem;     /* Reduce el espacio interno */
+.pie-pagina p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 1500px) {
+  .hero {
+    padding-top: 92px;
+    padding-bottom: 98px;
   }
 
-  .header-principal h1 {
-    font-size: 1.5rem;
+  .contenido-principal {
+    padding-top: 80px;
   }
 
   .celda-dia {
-    min-height: 80px;
-    padding: 2px; /* Menos padding en la celda para dar espacio al texto */
-  }
-
-  .numero-dia {
-    font-size: 0.8rem;
-  }
-
-  .dia-semana {
-    font-size: 0.7rem;
-    padding: 0.2rem;
+    min-height: 112px;
+    padding: 10px;
   }
 
   .etiqueta-evento {
-    font-size: 0.55rem; /* Texto aún más pequeño en celulares */
-    padding: 2px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .header-interior {
+    width: min(100% - 32px, 600px);
+    min-height: 68px;
+  }
+
+  .navegacion-principal {
+    gap: 17px;
+  }
+
+  .navegacion-principal a {
+    font-size: 0.83rem;
+  }
+
+  .navegacion-principal .enlace-accion {
+    padding: 9px 12px;
+  }
+
+  .hero {
+    padding: 60px 20px 64px;
+  }
+
+  .contenido-principal {
+    width: min(100% - 32px, 600px);
+    padding: 52px 0 64px;
+  }
+
+  .panel-calendario {
+    grid-template-columns: 1fr;
+  }
+
+  .celda-dia {
+    min-height: 82px;
+    padding: 5px;
+    border-radius: 9px;
+  }
+
+  .celda-vacia {
+    min-height: 60px;
+  }
+
+  .numero-dia {
+    width: 24px;
+    height: 24px;
+    font-size: 0.77rem;
+  }
+
+  .etiqueta-evento {
+    padding: 3px 4px;
+    font-size: 0.58rem;
+  }
+
+  .carrusel-contenedor {
+    padding: 25px;
+  }
+
+  .carrusel-tarjeta {
+    min-height: 140px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-interior {
+    width: calc(100% - 24px);
+    gap: 10px;
+  }
+
+  .marca {
+    gap: 7px;
+    font-size: 0.92rem;
+  }
+
+  .marca-icono {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+  }
+
+  .navegacion-principal {
+    gap: 11px;
+  }
+
+  .navegacion-principal a {
+    font-size: 0.77rem;
+  }
+
+  .navegacion-principal .enlace-accion {
+    padding: 8px 9px;
+  }
+
+  .hero {
+    padding: 48px 16px 54px;
+  }
+
+  .contenido-principal {
+    width: calc(100% - 24px);
+    padding-top: 43px;
+  }
+
+  .encabezado-seccion {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .calendario-contenedor {
+    padding: 15px 10px;
+    border-radius: 17px;
+  }
+
+  .calendario-controles {
+    grid-template-columns: 36px 1fr 36px;
+    margin-bottom: 18px;
+    gap: 6px;
+  }
+
+  .navegacion-calendario {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dia-semana {
+    font-size: 0.62rem;
+  }
+
+  .celda-dia {
+    min-height: 68px;
+    padding: 3px;
+  }
+
+  .celda-vacia {
+    min-height: 50px;
+  }
+
+  .numero-dia {
+    width: 21px;
+    height: 21px;
+    margin-bottom: 3px;
+    font-size: 0.7rem;
+  }
+
+  .etiqueta-evento {
+    padding: 2px 3px;
+    font-size: 0.52rem;
+    line-height: 1.15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
