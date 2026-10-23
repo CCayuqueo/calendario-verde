@@ -66,6 +66,48 @@ a:focus-visible {
   overflow: hidden;
 }
 
+.reveal {
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.reveal-escalonado > * {
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    translate 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-escalonado.reveal-visible > * {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.reveal-escalonado.reveal-visible > :nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.reveal-escalonado.reveal-visible > :nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.reveal-escalonado.reveal-visible > :nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.reveal-escalonado.reveal-visible > :nth-child(5) {
+  transition-delay: 320ms;
+}
+
 .header-principal {
   position: relative;
   z-index: 1;
@@ -135,9 +177,13 @@ a:focus-visible {
 }
 
 .navegacion-principal .enlace-accion:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.05);
   background: var(--color-accent-hover);
   color: white;
+}
+
+.navegacion-principal .enlace-accion:active {
+  transform: scale(0.95);
 }
 
 .hero {
@@ -228,9 +274,13 @@ a:focus-visible {
 }
 
 .boton-principal:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
   background: var(--color-accent-hover);
   box-shadow: 0 11px 24px rgb(129 56 25 / 22%);
+}
+
+.boton-principal:active {
+  transform: scale(0.95);
 }
 
 .boton-principal svg {
@@ -288,6 +338,17 @@ a:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
+.calendario-contenedor,
+.carrusel-contenedor {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.calendario-contenedor:hover,
+.carrusel-contenedor:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgb(29 56 45 / 14%);
+}
+
 .calendario-controles {
   display: grid;
   grid-template-columns: 42px 1fr 42px;
@@ -321,10 +382,14 @@ a:focus-visible {
 }
 
 .navegacion-calendario:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.05);
   border-color: var(--color-accent);
   background: #fff7f2;
   color: var(--color-accent);
+}
+
+.navegacion-calendario:active {
+  transform: scale(0.95);
 }
 
 .calendario-grid {
@@ -563,8 +628,13 @@ a:focus-visible {
 }
 
 .carrusel-controles button:not(:disabled):hover {
+  transform: scale(1.05);
   border-color: white;
   background: rgb(255 255 255 / 10%);
+}
+
+.carrusel-controles button:not(:disabled):active {
+  transform: scale(0.95);
 }
 
 .carrusel-controles button:disabled {
@@ -788,5 +858,13 @@ a:focus-visible {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .reveal,
+  .reveal-escalonado > * {
+    opacity: 1;
+    translate: none;
   }
 }
