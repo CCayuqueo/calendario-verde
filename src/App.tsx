@@ -1,6 +1,7 @@
 import { Header } from './components/Header';
 import { Calendario } from './components/Calendario';
 import { CarruselEventos } from './components/CarruselEventos';
+import { FadeIn } from './components/FadeIn';
 import './index.css'; 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <Header />
       <main id="inicio">
         <section className="hero" aria-labelledby="titulo-principal">
-          <div className="hero-interior">
+          <FadeIn className="hero-interior" stagger>
             <p className="hero-etiqueta">Fechas que inspiran cambios</p>
             <h1 id="titulo-principal">
               Un año para cuidar <span>lo que nos rodea.</span>
@@ -24,25 +25,27 @@ function App() {
                 <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-          </div>
+          </FadeIn>
         </section>
 
         <section id="calendario" className="contenido-principal" aria-labelledby="titulo-calendario">
-          <div className="encabezado-seccion">
+          <FadeIn className="encabezado-seccion">
             <div>
               <p className="seccion-etiqueta">Descubre y participa</p>
               <h2 id="titulo-calendario">Calendario ambiental</h2>
             </div>
             <p className="nota-seccion">Una fecha, una oportunidad para actuar.</p>
-          </div>
-          <div className="panel-calendario">
+          </FadeIn>
+          <FadeIn className="panel-calendario" stagger>
             <Calendario />
             <CarruselEventos />
-          </div>
+          </FadeIn>
         </section>
       </main>
       <footer className="pie-pagina">
-        <p>Pequeñas acciones, grandes cambios. Cuidemos nuestro planeta todos los días.</p>
+        <FadeIn>
+          <p>Pequeñas acciones, grandes cambios. Cuidemos nuestro planeta todos los días.</p>
+        </FadeIn>
       </footer>
     </div>
   );

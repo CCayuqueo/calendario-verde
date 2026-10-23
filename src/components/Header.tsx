@@ -1,7 +1,9 @@
+import { FadeIn } from './FadeIn';
+
 export function Header() {
   return (
     <header className="header-principal">
-      <div className="header-interior">
+      <FadeIn className="header-interior" stagger>
         <a className="marca" href="#inicio" aria-label="Calendario Verde, inicio">
           <span className="marca-icono" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -15,7 +17,7 @@ export function Header() {
           <a href="#inicio">Inicio</a>
           <a className="enlace-accion" href="#calendario">Ver calendario</a>
         </nav>
-      </div>
+      </FadeIn>
     </header>
   );
 }
