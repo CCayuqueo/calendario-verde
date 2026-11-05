@@ -12,8 +12,6 @@ type Posicion = {
   top: number;
 };
 
-const DURACION_TRANSICION = 160;
-
 export function EventoCalendario({ nombre, descripcion, hora }: EventoCalendarioProps) {
   const id = useId();
   const activadorRef = useRef<HTMLButtonElement>(null);
@@ -38,9 +36,12 @@ export function EventoCalendario({ nombre, descripcion, hora }: EventoCalendario
   const cerrar = () => {
     cancelarCierre();
     setAbierto(false);
+    const duracion = Number.parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue('--motion-duration-fast'),
+    );
     temporizadorDesmontajeRef.current = window.setTimeout(() => {
       setMontado(false);
-    }, DURACION_TRANSICION);
+    }, Number.isFinite(duracion) ? duracion : 0);
   };
 
   const programarCierre = () => {

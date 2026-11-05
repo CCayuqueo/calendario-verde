@@ -20,7 +20,12 @@ const obtenerUltimoDia = (año: number, mes: number, diaSemana: number) => {
 };
 
 export function Calendario() {
-  const [fechaActual, setFechaActual] = useState(new Date());
+  const [vistaMes, setVistaMes] = useState(() => ({
+    fecha: new Date(),
+    direccion: 0,
+    version: 0,
+  }));
+  const fechaActual = vistaMes.fecha;
 
   const año = fechaActual.getFullYear();
   const mes = fechaActual.getMonth(); // Enero es 0, Diciembre es 11
@@ -32,8 +37,13 @@ export function Calendario() {
   const dias = Array.from({ length: diasEnElMes }, (_, i) => i + 1);
   const espaciosVacios = Array.from({ length: primerDiaDelMes }, (_, i) => i);
 
-  const mesAnterior = () => setFechaActual(new Date(año, mes - 1, 1));
-  const mesSiguiente = () => setFechaActual(new Date(año, mes + 1, 1));
+  const cambiarMes = (direccion: -1 | 1) => {
+    setVistaMes((vista) => ({
+      fecha: new Date(vista.fecha.getFullYear(), vista.fecha.getMonth() + direccion, 1),
+      direccion,
+      version: vista.version + 1,
+    }));
+  };
 
   // --- LÓGICA DE EVENTOS DEL CALENDARIO AMBIENTAL ---
   
@@ -142,14 +152,17 @@ export function Calendario() {
   return (
     <article className="calendario-contenedor" aria-label="Calendario de fechas ambientales">
       <div className="calendario-controles">
-        <button className="navegacion-calendario" onClick={mesAnterior} aria-label="Mes anterior">&lsaquo;</button>
+        <button className="navegacion-calendario" onClick={() => cambiarMes(-1)} aria-label="Mes anterior">&lsaquo;</button>
         <h3 aria-live="polite">
           {fechaActual.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }).toUpperCase()}
         </h3>
-        <button className="navegacion-calendario" onClick={mesSiguiente} aria-label="Mes siguiente">&rsaquo;</button>
+        <button className="navegacion-calendario" onClick={() => cambiarMes(1)} aria-label="Mes siguiente">&rsaquo;</button>
       </div>
 
-      <div className="calendario-grid">
+      <div
+        key={vistaMes.version}
+        className={`calendario-grid${vistaMes.direccion ? ` calendario-mes-${vistaMes.direccion < 0 ? 'anterior' : 'siguiente'}` : ''}`}
+      >
         {diasSemana.map((dia) => (
           <div key={dia} className="dia-semana" aria-label={dia}>{dia}</div>
         ))}

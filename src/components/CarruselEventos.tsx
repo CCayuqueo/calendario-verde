@@ -97,6 +97,7 @@ export function CarruselEventos() {
 
   // Lógica de control del Carrusel
   const [indice, setIndice] = useState(0);
+  const [direccion, setDireccion] = useState(0);
     if (proximosEventos.length === 0) {
       return <div className="carrusel-contenedor">No hay más eventos este año.</div>;
   }
@@ -172,7 +173,10 @@ export function CarruselEventos() {
     <div className="carrusel-contenedor">
       <h3 className="carrusel-titulo">Próximos Eventos</h3>
       
-      <div className="carrusel-tarjeta">
+      <div
+        key={`${eventoActual.fecha.toISOString()}-${indice}`}
+        className={`carrusel-tarjeta${direccion ? ` carrusel-tarjeta-${direccion < 0 ? 'anterior' : 'siguiente'}` : ''}`}
+      >
         <div className="carrusel-fecha">
           {eventoActual.fecha.toLocaleDateString('es-ES', { 
             weekday: 'long', day: 'numeric', month: 'long' 
@@ -182,8 +186,11 @@ export function CarruselEventos() {
       </div>
 
       <div className="carrusel-controles">
-        <button 
-          onClick={() => setIndice(i => i - 1)} 
+        <button
+          onClick={() => {
+            setDireccion(-1);
+            setIndice((i) => Math.max(0, i - 1));
+          }}
           disabled={indice === 0}
         >
           &lt; Anterior
@@ -191,8 +198,11 @@ export function CarruselEventos() {
         
         <span>{indice + 1} de {proximosEventos.length}</span>
         
-        <button 
-          onClick={() => setIndice(i => i + 1)} 
+        <button
+          onClick={() => {
+            setDireccion(1);
+            setIndice((i) => Math.min(proximosEventos.length - 1, i + 1));
+          }}
           disabled={indice === proximosEventos.length - 1}
         >
           Siguiente &gt;

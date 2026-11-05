@@ -18,6 +18,11 @@
   --shadow-card: 0 16px 42px rgb(29 56 45 / 8%);
   --radius-card: 22px;
   --radius-control: 12px;
+  --motion-duration-fast: 160ms;
+  --motion-duration-ui: 220ms;
+  --motion-duration-reveal: 460ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -70,8 +75,8 @@ a:focus-visible {
   opacity: 0;
   translate: 0 18px;
   transition:
-    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
-    translate 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--motion-duration-reveal) var(--motion-ease-emphasized),
+    translate var(--motion-duration-reveal) var(--motion-ease-emphasized);
 }
 
 .reveal-visible {
@@ -83,8 +88,8 @@ a:focus-visible {
   opacity: 0;
   translate: 0 18px;
   transition:
-    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1),
-    translate 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--motion-duration-reveal) var(--motion-ease-emphasized),
+    translate var(--motion-duration-reveal) var(--motion-ease-emphasized);
 }
 
 .reveal-escalonado.reveal-visible > * {
@@ -93,19 +98,19 @@ a:focus-visible {
 }
 
 .reveal-escalonado.reveal-visible > :nth-child(2) {
-  transition-delay: 80ms;
+  transition-delay: 55ms;
 }
 
 .reveal-escalonado.reveal-visible > :nth-child(3) {
-  transition-delay: 160ms;
+  transition-delay: 110ms;
 }
 
 .reveal-escalonado.reveal-visible > :nth-child(4) {
-  transition-delay: 240ms;
+  transition-delay: 165ms;
 }
 
 .reveal-escalonado.reveal-visible > :nth-child(5) {
-  transition-delay: 320ms;
+  transition-delay: 220ms;
 }
 
 .header-principal {
@@ -162,7 +167,10 @@ a:focus-visible {
   font-size: 0.91rem;
   font-weight: 650;
   text-decoration: none;
-  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .navegacion-principal a:hover {
@@ -177,13 +185,13 @@ a:focus-visible {
 }
 
 .navegacion-principal .enlace-accion:hover {
-  transform: translateY(-1px) scale(1.05);
+  transform: translateY(-1px);
   background: var(--color-accent-hover);
   color: white;
 }
 
 .navegacion-principal .enlace-accion:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .hero {
@@ -270,17 +278,20 @@ a:focus-visible {
   font-size: 0.94rem;
   font-weight: 750;
   text-decoration: none;
-  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .boton-principal:hover {
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-2px);
   background: var(--color-accent-hover);
   box-shadow: 0 11px 24px rgb(129 56 25 / 22%);
 }
 
 .boton-principal:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .boton-principal svg {
@@ -340,7 +351,9 @@ a:focus-visible {
 
 .calendario-contenedor,
 .carrusel-contenedor {
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform var(--motion-duration-ui) var(--motion-ease-emphasized),
+    box-shadow var(--motion-duration-ui) var(--motion-ease-emphasized);
 }
 
 .calendario-contenedor:hover,
@@ -378,18 +391,22 @@ a:focus-visible {
   color: var(--color-forest);
   cursor: pointer;
   font-size: 1.35rem;
-  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .navegacion-calendario:hover {
-  transform: translateY(-1px) scale(1.05);
+  transform: translateY(-1px);
   border-color: var(--color-accent);
   background: #fff7f2;
   color: var(--color-accent);
 }
 
 .navegacion-calendario:active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .calendario-grid {
@@ -397,6 +414,38 @@ a:focus-visible {
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: clamp(3px, 0.8vw, 8px);
   text-align: center;
+}
+
+.calendario-mes-anterior {
+  animation: calendario-entrada-anterior var(--motion-duration-ui) var(--motion-ease-emphasized) both;
+}
+
+.calendario-mes-siguiente {
+  animation: calendario-entrada-siguiente var(--motion-duration-ui) var(--motion-ease-emphasized) both;
+}
+
+@keyframes calendario-entrada-anterior {
+  from {
+    opacity: 0.55;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes calendario-entrada-siguiente {
+  from {
+    opacity: 0.55;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .dia-semana {
@@ -424,13 +473,22 @@ a:focus-visible {
   border-radius: 12px;
   background: #fbfcf9;
   text-align: left;
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
-.celda-dia:hover {
+.celda-dia:hover,
+.celda-dia:focus-within {
   transform: translateY(-1px);
   border-color: #d7e4d3;
   background: #f2f7ef;
+}
+
+.celda-dia.dia-hoy:focus-within {
+  border-color: #a6bea0;
+  background: #eff5ec;
 }
 
 .numero-dia {
@@ -444,6 +502,9 @@ a:focus-visible {
   color: #43584a;
   font-size: 0.82rem;
   font-weight: 680;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    color var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .dia-hoy {
@@ -479,13 +540,22 @@ a:focus-visible {
   font-weight: 650;
   line-height: 1.25;
   text-align: left;
-  transition: background-color 180ms ease, box-shadow 180ms ease;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .etiqueta-evento:hover,
 .etiqueta-evento[aria-expanded="true"] {
+  transform: translateX(2px);
   background: #d6e4d1;
   box-shadow: inset 0 0 0 1px #9bb895;
+}
+
+.etiqueta-evento:focus-visible {
+  position: relative;
+  z-index: 1;
 }
 
 .etiqueta-evento-texto {
@@ -511,7 +581,9 @@ a:focus-visible {
   opacity: 0;
   pointer-events: none;
   transform: translateY(4px);
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .evento-tooltip-abierto {
@@ -588,6 +660,38 @@ a:focus-visible {
   background: rgb(255 255 255 / 8%);
 }
 
+.carrusel-tarjeta-anterior {
+  animation: carrusel-entrada-anterior var(--motion-duration-ui) var(--motion-ease-emphasized) both;
+}
+
+.carrusel-tarjeta-siguiente {
+  animation: carrusel-entrada-siguiente var(--motion-duration-ui) var(--motion-ease-emphasized) both;
+}
+
+@keyframes carrusel-entrada-anterior {
+  from {
+    opacity: 0.55;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes carrusel-entrada-siguiente {
+  from {
+    opacity: 0.55;
+    transform: translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .carrusel-fecha {
   margin-bottom: 12px;
   color: #c4d5bc;
@@ -624,17 +728,21 @@ a:focus-visible {
   cursor: pointer;
   font-size: 0.78rem;
   font-weight: 650;
-  transition: background-color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
 .carrusel-controles button:not(:disabled):hover {
-  transform: scale(1.05);
+  transform: translateY(-1px);
   border-color: white;
   background: rgb(255 255 255 / 10%);
 }
 
 .carrusel-controles button:not(:disabled):active {
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .carrusel-controles button:disabled {
@@ -682,6 +790,24 @@ a:focus-visible {
   margin: 0;
   font-size: 0.82rem;
   line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0ms;
+    --motion-duration-ui: 0ms;
+    --motion-duration-reveal: 0ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-escalonado > * {
+    opacity: 1;
+    translate: 0;
+  }
 }
 
 @media (min-width: 1500px) {
